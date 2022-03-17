@@ -9,8 +9,8 @@ from functools import partial
 import threading
 import imutils
 title = 'Swarnrekha Infosolutions'
-SET_WIDTH = 650
-SET_HEIGHT=368
+SET_WIDTH = 1366
+SET_HEIGHT=768
 class PDF(FPDF):
     def __init__(self, **kwargs):
         super(PDF,self).__init__(**kwargs)
@@ -253,6 +253,53 @@ def create_table(table_data, title='', data_size = 10, title_size=12, align_data
     y3 = pdf.get_y()
     pdf.line(x_left,y3,x_right,y3)
 
+def no_done_button():
+    num_of_items=entry2.get()
+    
+    num_of_items=int(entry2.get())
+    print(type(num_of_items))
+    num_of_items
+
+    label_position_x = 100
+    label_position_y = 200
+    entry3_position_x = 250
+    entry3_position_y = 200
+    for i in range(1, int(num_of_items) + 1):
+        
+        label3 = tkinter.Label(window, text=f'Enter the name of product ')
+        label3.config(font=('helvetica', 10))
+        canvas.create_window(label_position_x, label_position_y, window=label3)
+        
+        entry3 = tkinter.Entry (window) 
+        canvas.create_window(entry3_position_x, entry3_position_y, window=entry3,)
+        label_position_y +=50
+        entry3_position_y +=50
+        # item_name = input(f'Enter name of product {i}\n')
+        item_name = entry3.get()
+        item_list.append(item_name)
+
+# def quantity_done_button():
+#     num_of_items=entry3.get()
+#     int(num_of_items)
+#     #--------------Qty Products--------------------
+#     for i in range(1, int(num_of_items) + 1):
+#         product_serial = i-1
+#         label4 = tkinter.Label(window, text=f'Enter quantity of \'{item_list[product_serial]}\' \n')
+#         label4.config(font=('helvetica', 10))
+#         canvas.create_window(100, 250, window=label4)
+
+#         entry4 = tkinter.Entry (window) 
+#         entry4.insert(0,1)
+#         canvas.create_window(250, 250, window=entry4,)
+        
+#         Qty = entry4.get()
+#         qty_list.append(Qty)
+
+
+
+
+
+
 
 pdf = PDF()
 pdf.add_page()
@@ -260,69 +307,7 @@ pdf.add_page()
 pdf.set_font("Times", size=10)
 today = date.today()
 d1 = today.strftime("%B %d, %Y")
-
-window = tkinter.Tk()
-window.title("Dhoni Review System")
-# cv_img = cv2.cvtColor(cv2.imread("welcome.png"),cv2.COLOR_BGR2RGB)
-canvas = tkinter.Canvas(window,width=SET_WIDTH,height=SET_HEIGHT)
-# photo = PIL.ImageTk.PhotoImage(image=PIL.Image.fromarray(cv_img))
-# image_on_canavas= canvas.create_image(0,0, anchor=tkinter.NW,image=photo)
-canvas.pack()
-label = tkinter.Label(window, text='Your Company Name')
-label.config(font=('helvetica', 10))
-canvas.create_window(100, 50, window=label)
-
-entry = tkinter.Entry (window) 
-entry.insert(0,title)
-canvas.create_window(250, 50, window=entry,)
-
-label = tkinter.Label(window, text='Date')
-label.config(font=('helvetica', 10))
-canvas.create_window(100, 100, window=label)
-
-entry = tkinter.Entry (window) 
-entry.insert(0,d1)
-canvas.create_window(250, 100, window=entry,)
-
-label = tkinter.Label(window, text='Enter the number of products')
-label.config(font=('helvetica', 10))
-canvas.create_window(100, 150, window=label)
-
-entry = tkinter.Entry (window) 
-entry.insert(0,1)
-canvas.create_window(250, 150, window=entry,)
-
-for i in range(1, entry + 1):
-    label = tkinter.Label(window, text='Enter the name of products')
-    label.config(font=('helvetica', 10))
-    canvas.create_window(100, 150, window=label)
-
-    entry = tkinter.Entry (window) 
-    entry.insert(0,1)
-    canvas.create_window(250, 150, window=entry,)
-    item_name = input(f'Enter name of product {i}\n')
-    item_list.append(item_name)
-
-
-btn1 = tkinter.Button(window,text="Company Name",width=50,)
-btn1.pack()
-
-btn2 = tkinter.Button(window,text="<< Previous (Slow)",width=50,)
-btn2.pack()
-
-btn3 = tkinter.Button(window,text="Next (Fast) >>",width=50)
-btn3.pack()
-
-btn4 = tkinter.Button(window,text="Next (Slow) >>",width=50)
-btn4.pack()
-
-btn5 = tkinter.Button(window,text="Give Out",width=50)
-btn5.pack()
-
-btn6 = tkinter.Button(window,text="Give Not Out",width=50)
-btn6.pack()
-
-num_of_items = int(input('Enter the number of products\n'))
+# num_of_items = int(input('Enter the number of products\n'))
 data_as_dict = {}
 item_list=[]
 qty_list=[]
@@ -332,43 +317,80 @@ data_as_dict["Item name"] = []
 data_as_dict["Qty"] = []
 data_as_dict["Rate"] = []
 data_as_dict["Amount"] = []
+window = tkinter.Tk()
+window.title("Dhoni Review System")
+# cv_img = cv2.cvtColor(cv2.imread("welcome.png"),cv2.COLOR_BGR2RGB)
+canvas = tkinter.Canvas(window,width=SET_WIDTH,height=SET_HEIGHT)
+# photo = PIL.ImageTk.PhotoImage(image=PIL.Image.fromarray(cv_img))
+# image_on_canavas= canvas.create_image(0,0, anchor=tkinter.NW,image=photo)
+canvas.pack()
+#--------------Your company--------------------
+label = tkinter.Label(window, text='Your Company Name')
+label.config(font=('helvetica', 10))
+canvas.create_window(100, 50, window=label)
+
+entry = tkinter.Entry (window) 
+entry.insert(0,title)
+canvas.create_window(250, 50, window=entry,)
+
+#--------------date--------------------
+label1 = tkinter.Label(window, text='Date')
+label1.config(font=('helvetica', 10))
+canvas.create_window(100, 100, window=label1)
+
+entry1 = tkinter.Entry (window) 
+entry1.insert(0,d1)
+canvas.create_window(250, 100, window=entry1,)
+
+#--------------No. products--------------------
+label2 = tkinter.Label(window, text='Enter the number of products')
+label2.config(font=('helvetica', 10))
+canvas.create_window(100, 150, window=label2)
+
+entry2 = tkinter.Entry (window) 
+entry2.insert(0,1)
+canvas.create_window(250, 150, window=entry2,)
+# num_of_items = entry2.get()
+
+btn = tkinter.Button(window,text="Done",width=10,command=no_done_button)
+canvas.create_window(400, 150, window=btn)
+
+
+
+
 
 # sliced= item_name.split(',')
 # for item in num_of_items:
 #     data_as_dict.update({"Item name": [sliced[item]]})
 # print(data_as_dict)
 
-def get_number_of_items():
-    for i in range(1, num_of_items + 1):
-            item_name = input(f'Enter name of product {i}\n')
-            item_list.append(item_name)
-
-for i in range(1, num_of_items + 1):
-        product_serial = i-1
-        Qty = input(f'Enter quantity of \'{item_list[product_serial]}\' \n')
-        qty_list.append(Qty)
-
-for i in range(1, num_of_items + 1):
-        product_serial = i-1
-        rate = input(f'Enter rate of \'{item_list[product_serial]}\' \n')
-        rate_list.append(rate)
-
-for n in range(num_of_items):
-    amount = int(rate_list[n])*int(qty_list[n])
-    amount_list.append(str(amount))
-data_as_dict = dict({"Item name": item_list,
-                    "Qty":qty_list,
-                    "Rate":rate_list,
-                    "Amount":amount_list})
-print(data_as_dict)
+# def get_number_of_items():
+#     for i in range(1, num_of_items + 1):
+#             item_name = input(f'Enter name of product {i}\n')
+#             item_list.append(item_name)
 
 
-create_table(table_data = data_as_dict,title='', cell_width='even')
-pdf.ln()
+# for i in range(1, num_of_items + 1):
+#         product_serial = i-1
+#         rate = input(f'Enter rate of \'{item_list[product_serial]}\' \n')
+#         rate_list.append(rate)
+
+# for n in range(num_of_items):
+#     amount = int(rate_list[n])*int(qty_list[n])
+#     amount_list.append(str(amount))
+# data_as_dict = dict({"Item name": item_list,
+#                     "Qty":qty_list,
+#                     "Rate":rate_list,
+#                     "Amount":amount_list})
+# print(data_as_dict)
 
 
-pdf.output('table_function.pdf')
+# create_table(table_data = data_as_dict,title='', cell_width='even')
+# pdf.ln()
 
 
+# pdf.output('table_function.pdf')
+# window.after(100, no_done_button)
+window.attributes('-fullscreen', True)
 window.mainloop()
 # Need to create obejct as pdf
