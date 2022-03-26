@@ -1,4 +1,3 @@
-from re import T
 from turtle import width
 from fpdf import FPDF
 from datetime import date
@@ -14,131 +13,120 @@ SET_WIDTH = 366
 SET_HEIGHT=768
 window = tkinter.Tk()
 window.title("Bill App")
-window.geometry('700x500')
+window.geometry('900x500')
 item_list=[]
 item_list_main=[]
 qty_list=[]
 qty_list_main=[]
 rate_list=[]
+rate_list_main=[]
 amount_list=[]
+amount_list_main=[]
 data_as_dict = {}
 no_of_items = {"Number of items" : "" }
 data_as_dict["Item name"] = []
 data_as_dict["Qty"] = []
 data_as_dict["Rate"] = []
 data_as_dict["Amount"] = []
-
+widget = []
 No_Var=tkinter.IntVar()
 Name_Var=tkinter.StringVar()
 
 def print_item_name():
+    num_of_items=No_Var.get()
+    
+    #--------------------Amount-------------------
+    
+    # label4 = tkinter.Label(window, text='')
+    # label4.config(font=('helvetica', 10))
+    # label4.grid(row=name_position,column=4,pady=20,padx=0)
+    # for n in range(num_of_items):
+    #     print(n)
+    #     amount = int(rate_list[n].get())*int(qty_list[n].get())
+    #     amount_list.append(str(amount))
+    # for amount in amount_list:
+    #     entry_list = entry_list + amount+'\n'
+    #     label4.config(text = entry_list)
+        
+    
     for items in item_list:
         items_for_list = (str(items.get()))
-        print(items_for_list)
         item_list_main.append(items_for_list)
     for qty in qty_list:
         qty_for_list = (str(qty.get()))
-        print(qty_for_list)
         qty_list_main.append(qty_for_list)
+    for rate in rate_list:
+        rate_for_list = (str(rate.get()))
+        rate_list_main.append(rate_for_list)
+    #--------------------Amount-------------------
+    label6 = tkinter.Label(window, text=f'Amount')
+    label6.config(font=('helvetica', 10))
+    label6.grid(row=3,column=3,pady=20,padx=5)
+
+    for i in range(num_of_items):   
+        name_position = i+4
+        amount = int(rate_list_main[i])*int(qty_list_main[i])
+        amount_list.append(str(amount))
+        entry5 = tkinter.Entry (window) 
+        entry5.insert(0,amount)
+        entry5.config(state= "disabled")
+        entry5.grid(row=name_position,column=3,pady=20,padx=5)
+
+    for amount in amount_list:
+        amount_for_list = (str(amount))
+        print(amount_for_list)
+        amount_list_main.append(amount_for_list)
     data_as_dict = dict({"Item name": item_list_main,
-                     "Qty":qty_list_main})
+                     "Qty":qty_list_main,
+                     "Rate":rate_list_main,
+                     "Amount":amount_list_main})
     print(data_as_dict)
 
+def clear():
+    pass
 
 def name_take():
     num_of_items=No_Var.get()
+    
     for i in range(num_of_items):
-        name_position = i+3
-        label3 = tkinter.Label(window, text=f'Enter the name of product ')
+        
+        name_position = i+4
+        label3 = tkinter.Label(window, text=f'Name')
         label3.config(font=('helvetica', 10))
-        label3.grid(row=name_position,column=0,pady=20,padx=5)
+        label3.grid(row=3,column=0,pady=20,padx=5)
             
         entry3 = tkinter.Entry (window) 
-        entry3.grid(row=name_position,column=1,pady=20,padx=5)
+        entry3.grid(row=name_position,column=0,pady=20,padx=5)
         item_list.append(entry3)
     
         #--------------Qty--------------------
 
-        # label4 = tkinter.Label(window, text='Enter the quantity of products')
-        # label4.config(font=('helvetica', 10))
-        # label4.grid(row=name_position,column=0,pady=20,padx=5)
+        label4 = tkinter.Label(window, text=f'Qty')
+        label4.config(font=('helvetica', 10))
+        label4.grid(row=3,column=1,pady=20,padx=5)
 
+        entry6 = tkinter.Entry (window) 
+        entry6.insert(0,1)
+        entry6.grid(row=name_position,column=1,pady=20,padx=5)
+        qty_list.append(entry6)
 
-        entry2 = tkinter.Entry (window) 
-        entry2.insert(0,1)
-        entry2.grid(row=name_position,column=2,pady=20,padx=5)
-        qty_list.append(entry2)
-        # num_of_items = entry2.get()
+        #--------------------Rate--------------------
+        label5 = tkinter.Label(window, text=f'Rate')
+        label5.config(font=('helvetica', 10))
+        label5.grid(row=3,column=2,pady=20,padx=5)
 
+        entry4 = tkinter.Entry (window) 
+        entry4.insert(0,1)      
+        entry4.grid(row=name_position,column=2,pady=20,padx=5)
+        rate_list.append(entry4)
+
+    
     btn1 = tkinter.Button(window,text="Done",width=10,command=print_item_name)
-    btn1.grid(row=name_position,column=3,pady=20,padx=5)
+    btn1.grid(row=name_position,column=5,pady=20,padx=5)
 
 
    
-    # for x in range(1, int(num_of_items) + 1):
-        
-    #     label3 = tkinter.Label(window, text=f'Enter the name of product ')
-    #     label3.config(font=('helvetica', 10))
-    #     canvas.create_window(label3_position_x, label3_position_y, window=label3)
-        
-    #     entry3 = tkinter.Entry (window) 
-    #     canvas.create_window(entry3_position_x, entry3_position_y, window=entry3,)
-
-    #     btn1 = tkinter.Button(window,text="Done",width=10,command=item_list)
-    #     canvas.create_window(400, 200, window=btn1)
-    #     label3_position_y +=50
-    #     entry3_position_y +=50
-    #     # item_name = input(f'Enter name of product {i}\n')
     
-    #     item_list.append(entry3)
-    #     print(item_list)
-        
-
-                   
-
-
-# def qty_done_button():
-#     num_of_items=entry3.get()
-#     int(num_of_items)
-#     #--------------Qty Products--------------------
-#     for i in range(1, int(num_of_items) + 1):
-#         product_serial = i-1
-#         label4 = tkinter.Label(window, text=f'Enter quantity of \'{item_list[product_serial]}\' \n')
-#         label4.config(font=('helvetica', 10))
-#         canvas.create_window(100, 250, window=label4)
-
-#         entry4 = tkinter.Entry (window) 
-#         entry4.insert(0,1)
-#         canvas.create_window(250, 250, window=entry4,)
-        
-#         Qty = entry4.get()
-#         qty_list.append(Qty)
-
-# def print_name_of_items(num_of_items):
-#     #--------------Name products--------------------
-#     num_of_items=No_Var.get()
-#     label3_position_x = 100
-#     label3_position_y = 200
-#     entry3_position_x = 250
-#     entry3_position_y = 200
-#     for i in range(num_of_items):
-        
-#         label3 = tkinter.Label(window, text=f'Enter the name of product ')
-#         label3.config(font=('helvetica', 10))
-#         label3.grid(row=i,column=0,pady=20,padx=5)
-            
-#         entry3 = tkinter.Entry (window) 
-#         entry3.grid(row=i,column=1,pady=20,padx=5)
-
-
-#         btn1 = tkinter.Button(window,text="Done",width=10,command=item_list)
-#         btn1.grid(row=i,column=1,pady=20,padx=5)
-
-#             # item_name = input(f'Enter name of product {i}\n')
-        
-#         item_list.append(entry3)
-#         print(item_list)
-
 # pdf = PDF()
 # pdf.add_page()
 # pdf.header('20,000 Leagues Under the Seas')  
@@ -146,8 +134,6 @@ def name_take():
 today = date.today()
 d1 = today.strftime("%B %d, %Y")
 # num_of_items = int(input('Enter the number of products\n'))
-global flag 
-flag = False
 # cv_img = cv2.cvtColor(cv2.imread("welcome.png"),cv2.COLOR_BGR2RGB)
 # canvas = tkinter.Canvas(window,width=SET_WIDTH,height=SET_HEIGHT)
 
@@ -181,21 +167,12 @@ label2.grid(row=2,column=0,pady=20,padx=5)
 entry2 = tkinter.Entry (window,textvariable = No_Var) 
 entry2.grid(row=2,column=1,pady=20,padx=5)
 
-btn=tkinter.Button(window,text = 'Done', command = name_take)
+btn=tkinter.Button(window,text = 'Done', width = 10,command = name_take)
 btn.grid(row=2,column=2,pady=20,padx=5)
 
-#--------------------------------
-# print_name_of_items(name_take())
- 
+btn2=tkinter.Button(window,text = 'Clear',width = 10)
+btn2.grid(row=2,column=3,pady=20,padx=5) 
 
-# label3 = tkinter.Label(window, text=f'Enter the name of product ')
-# label3.config(font=('helvetica', 10))
-# canvas.create_window(100, label3_position_y+50 , window=label3)
-        
-# entry3 = tkinter.Entry (window) 
-# canvas.create_window(250, label3_position_y+50 , window=entry3,)
-# btn1 = tkinter.Button(window,text="Done",width=10,command=item_list)
-# canvas.create_window(400, label3_position_y+50 , window=btn1)
 
 
 #--------------Qty--------------------
