@@ -8,6 +8,16 @@ FPDF2
 pip install FPDF2
 ```
 
+Tkinter
+```bash
+pip install tk
+```
+
+Date and Time
+```bash
+pip install DateTime
+```
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
