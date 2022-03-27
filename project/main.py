@@ -1,4 +1,3 @@
-from tkPDFViewer import tkPDFViewer as pdf_viewer
 from fpdf import FPDF
 from datetime import date
 import tkinter 
@@ -288,11 +287,6 @@ def output_pdf():
     pdf.ln()
     pdf.output('project/pdfs/Bill.pdf')
 
-    v1 = pdf_viewer.ShowPdf()
-    v2 = v1.pdf_view(window,
-                 pdf_location = r"project/pdfs/Bill.pdf", 
-                 width = 50, height = 100)
-    v2.pack()
 
 def clear():
     pass
