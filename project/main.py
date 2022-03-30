@@ -8,6 +8,8 @@ SET_HEIGHT=768
 window = tkinter.Tk()
 window.title("Bill App")
 window.geometry('900x500')
+# photo = tkinter.BitmapImage(r'\assets\icon.ico')  v 
+window.iconbitmap(r'project\assets\icon.ico')  
 item_list=[]
 item_list_main=[]
 qty_list=[]
@@ -25,6 +27,7 @@ data_as_dict["Amount"] = []
 widget = []
 No_Var=tkinter.IntVar()
 Name_Var=tkinter.StringVar()
+DefaultFileName = tkinter.StringVar()
 
 class PDF(FPDF):
     def __init__(self, **kwargs):
@@ -285,7 +288,8 @@ def output_pdf():
     print(data_as_dict)
     pdf.create_table(table_data = data_as_dict,title=entry.get(), cell_width='even')
     pdf.ln()
-    pdf.output('project/pdfs/Bill.pdf')
+    Name = DefaultFileName.get()
+    pdf.output(f'project/pdfs/{Name}.pdf')
 
 
 def clear():
@@ -372,6 +376,13 @@ btn.grid(row=2,column=2,pady=20,padx=5)
 btn2=tkinter.Button(window,text = 'Clear',width = 10)
 btn2.grid(row=2,column=3,pady=20,padx=5) 
 
+filename = tkinter.Label(window, text='Enter the file name')
+filename.config(font=('helvetica', 10))
+filename.grid(row=1,column=2,pady=20,padx=5)
+
+filename1 = tkinter.Entry (window, textvariable=DefaultFileName) 
+filename1.grid(row=1,column=3,pady=20,padx=5)
+filename1.insert(0,"Bill")
 
 # sliced= item_name.split(',')
 # for item in num_of_items:
